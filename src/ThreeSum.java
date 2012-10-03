@@ -3,12 +3,13 @@ import java.util.Arrays;
 public class ThreeSum {
     
     public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
+
         ArrayList<ArrayList<Integer>> out = new ArrayList<ArrayList<Integer>>();
         
         Arrays.sort(num);
         int length = num.length;
+        
+        int[] a = null;
         
         for (int i = 0; i < length; i++) {
             for (int j = i+1; j < length; j++) {
@@ -30,11 +31,31 @@ public class ThreeSum {
                 }
                 
                 if (k != -1) {
-                    ArrayList<Integer> item = new ArrayList<Integer>();
-                    item.add(num[i]);
-                    item.add(num[j]);
-                    item.add(num[k]);
-                    out.add(item);
+                    boolean flag = false;
+                    if (a != null) {
+                        if (a[0] != num[i] && a[1] != num[j])
+                            flag = true;
+                    }
+                    else {
+                        flag = true;
+
+                    }
+                        
+                    if (flag) {
+                        ArrayList<Integer> item = new ArrayList<Integer>();
+                        item.add(num[i]);
+                        item.add(num[j]);
+                        item.add(num[k]);
+                        out.add(item);
+                        
+                        a = new int[3];
+                        a[0] = num[i];
+                        a[1] = num[j];
+                        a[2] = num[k];
+                        
+                    }
+                    
+                    
                 }
                 
             }
