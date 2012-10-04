@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 public class ThreeSum {
     
     public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
@@ -8,9 +9,9 @@ public class ThreeSum {
         
         Arrays.sort(num);
         int length = num.length;
+        HashSet<String> filter = new HashSet<String>();
         
-        int[] a = null;
-        
+       
         for (int i = 0; i < length; i++) {
             for (int j = i+1; j < length; j++) {
                 int rest = 0 - num[i] - num[j];
@@ -31,32 +32,17 @@ public class ThreeSum {
                 }
                 
                 if (k != -1) {
-                    boolean flag = false;
-                    if (a != null) {
-                        if (a[0] == num[i] && a[1] == num[j])
-                            flag = false;
-                        else 
-                            flag = true;
-                    }
-                    else {
-                        flag = true;
-
-                    }
-                        
-                    if (flag) {
+                    
+                    String key = new String(num[i]+" "+num[j]+" "+num[k]);
+                    if (!filter.contains(key)) {
                         ArrayList<Integer> item = new ArrayList<Integer>();
                         item.add(num[i]);
                         item.add(num[j]);
                         item.add(num[k]);
                         out.add(item);
-                        
-                        a = new int[3];
-                        a[0] = num[i];
-                        a[1] = num[j];
-                        a[2] = num[k];
-                        
+                        filter.add(key);
                     }
-                    
+                  
                     
                 }
                 
