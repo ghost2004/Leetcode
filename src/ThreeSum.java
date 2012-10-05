@@ -13,7 +13,7 @@ public class ThreeSum {
         
        
         for (int i = 0; i < length; i++) {
-            for (int j = i+1; j < length; j++) {
+            for (int j = i+1; j < length - 1; j++) {
                 int rest = 0 - num[i] - num[j];
                 int k = -1;
                 int lo = j + 1; 
