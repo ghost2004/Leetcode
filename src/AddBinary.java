@@ -1,51 +1,40 @@
 
 public class AddBinary {
     
-    private long stringToInt(String in) {
-        long out = 0;
-        int idx = 0;
-        int len = in.length();
-        while (idx < len) {
-            char i = in.charAt(idx);
-            int v;
-            if (i == '1')
-                v = 1;
-            else
-                v = 0;
-
-            out = 2*out + v;
-            idx++;
-        }
-        return out;
-    }
-    
-    private String intToString(long in) {
-        long v = in;
-        String t = "";
-        if (in == 0)
-            return "0";
-        while (v > 0) {
-            long i = v % 2;
-            char p;
-            if (i == 1)
-                p = '1';
-            else
-                p = '0';
-            
-            t = p + t;
-            
-            v = v >> 1;
-        }
-        return t;
+    public int getIntFromString(String in, int idx) {
+        if (idx < 0)
+            return 0;
+        if (in.charAt(idx) == '1')
+            return 1;
+        return 0;
     }
     public String addBinary(String a, String b) {
 
-        String out = null;
-        long va = stringToInt(a);
-        long vb = stringToInt(b);
+        String out = "";
         
-        out = intToString(va+vb);
+        int idxa = a.length() - 1;
+        int idxb = b.length() - 1;
         
+        int max;
+        
+        if (idxa > idxb)
+            max = idxa;
+        else
+            max = idxb;
+        int carry = 0;
+        for (int i = max; i >= 0; i--) {
+            int sum = getIntFromString(a, idxa) + getIntFromString(b, idxb) +carry;
+            carry = sum/2;
+            int bit = sum % 2;
+            if (bit == 1)
+                out = "1" + out;
+            else
+                out = "0" + out; 
+        }
+        if (carry == 1)
+            out = "1" + out;
+        idxa--;
+        idxb--;
         return out;
     }
 
