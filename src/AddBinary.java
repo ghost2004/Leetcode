@@ -14,6 +14,7 @@ public class AddBinary {
                 v = 0;
 
             out = 2*out + v;
+            idx++;
         }
         return out;
     }
@@ -21,6 +22,8 @@ public class AddBinary {
     private String intToString(int in) {
         int v = in;
         String t = "";
+        if (in == 0)
+            return "0";
         while (v > 0) {
             int i = v % 2;
             char p;
@@ -30,6 +33,8 @@ public class AddBinary {
                 p = '0';
             
             t = p + t;
+            
+            v = v >> 1;
         }
         return t;
     }
