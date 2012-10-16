@@ -1,8 +1,8 @@
 
 public class AddBinary {
     
-    private int stringToInt(String in) {
-        int out = 0;
+    private long stringToInt(String in) {
+        long out = 0;
         int idx = 0;
         int len = in.length();
         while (idx < len) {
@@ -19,13 +19,13 @@ public class AddBinary {
         return out;
     }
     
-    private String intToString(int in) {
-        int v = in;
+    private String intToString(long in) {
+        long v = in;
         String t = "";
         if (in == 0)
             return "0";
         while (v > 0) {
-            int i = v % 2;
+            long i = v % 2;
             char p;
             if (i == 1)
                 p = '1';
@@ -41,8 +41,8 @@ public class AddBinary {
     public String addBinary(String a, String b) {
 
         String out = null;
-        int va = stringToInt(a);
-        int vb = stringToInt(b);
+        long va = stringToInt(a);
+        long vb = stringToInt(b);
         
         out = intToString(va+vb);
         
