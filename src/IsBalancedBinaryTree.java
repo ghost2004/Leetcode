@@ -5,12 +5,22 @@ public class IsBalancedBinaryTree {
         private TreeNode left;
         private TreeNode right;
     }
-    public int depth(TreeNode node) {
+    public int checkDepth(TreeNode node) {
         if (node == null)
             return 0;
-        int leftDepth = depth(node.left);
-        int rightDepth = depth(node.right);
+        int leftDepth = checkDepth(node.left);
+        if (leftDepth == -1)
+            return -1;
+        int rightDepth = checkDepth(node.right);
+        
+        if (rightDepth == -1)
+            return -1;
+        
+        if (Math.abs(leftDepth - rightDepth) > 1)
+            return -1;
+        
         int depth;
+        
         if (leftDepth > rightDepth)
             depth = leftDepth+1;
         else
@@ -18,17 +28,10 @@ public class IsBalancedBinaryTree {
         return depth;
     }
     
+
     public boolean isBalanced(TreeNode root) {
-        if (root == null)
-            return true;
-        if (!isBalanced(root.left))
+        if (checkDepth(root) == -1)
             return false;
-        if (!isBalanced(root.right))
-            return false;
-        
-        if (Math.abs(depth(root.left) - depth(root.right))  > 1)
-            return false;
-        
         return true;
     }
 
