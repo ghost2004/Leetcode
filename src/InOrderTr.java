@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Stack;
 
 public class InOrderTr {
     public class TreeNode {
@@ -22,7 +22,23 @@ public class InOrderTr {
         
         if (root == null)
             return out;
-        inorder(root, out);
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode pt = root;
+        while (pt != null) {
+            stack.push(pt);
+            pt = pt.left;
+        }
+        
+        while (!stack.empty()) {
+            pt = stack.pop();
+            out.add(pt.val);
+            pt = pt.right;
+            while (pt != null) {
+                stack.push(pt);
+                pt = pt.left;
+            }
+          
+        }
         
         return out;
     }
