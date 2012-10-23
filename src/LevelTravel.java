@@ -104,4 +104,62 @@ public class LevelTravel {
         return out;
         
     }
+    
+    
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
+
+        ArrayList<ArrayList<Integer>> out = new ArrayList<ArrayList<Integer>>();
+        
+        
+        if (root == null)
+            return out;
+        ValPack p =  new ValPack();
+        p.node = root;
+        p.level = 0;
+        LinkedList<ValPack> nodeList = new LinkedList<ValPack>();
+        LinkedList<ValPack> list = new LinkedList<ValPack>();
+        nodeList.addLast(p);
+        int curLevel = 0;
+        while (nodeList.size() != 0) {
+            p = nodeList.removeFirst();
+            
+            if (p.level != curLevel) {
+                ArrayList<Integer> item = new ArrayList<Integer>();
+                while (!list.isEmpty()) {
+                    if (curLevel % 2 == 0)
+                        item.add(list.removeFirst().node.val);
+                    else
+                        item.add(list.removeLast().node.val);
+                }
+                out.add(item);
+                list = new LinkedList<ValPack>();
+                curLevel = p.level;
+            }
+            
+            list.addLast(p);
+            if (p.node.left != null) {
+                ValPack v = new ValPack();
+                v.node = p.node.left;
+                v.level = p.level + 1;
+                nodeList.addLast(v);
+            }
+            if (p.node.right != null) {
+                ValPack v = new ValPack();
+                v.node = p.node.right;
+                v.level = p.level + 1;
+                nodeList.addLast(v);
+            }
+           
+        }
+        ArrayList<Integer> item = new ArrayList<Integer>();
+        while (!list.isEmpty()) {
+            
+            if (curLevel % 2 == 0)
+                item.add(list.removeFirst().node.val);
+            else
+                item.add(list.removeLast().node.val);
+        }
+        out.add(item);
+        return out;
+    }
 }
