@@ -60,7 +60,15 @@ public class DecodeWays {
                         i++;
                     }
                     
-                    outNum *= cnt;
+                    if (i < length -1 && s.charAt(i+1) == '0') {
+                        if (s.charAt(i) > '2')
+                            return 0;
+                        cnt--;
+                        i++;
+                    }
+                        
+                    if (cnt != 0)
+                        outNum *= cnt;
 
                 }
                     
@@ -85,6 +93,8 @@ public class DecodeWays {
         System.out.println(s + " --> "+d.numDecodings(s));   
         s = "110";
         System.out.println(s + " --> "+d.numDecodings(s));  
+        s = "230";
+        System.out.println(s + " --> "+d.numDecodings(s));        
         s = "1090";
         System.out.println(s + " --> "+d.numDecodings(s));
     }
