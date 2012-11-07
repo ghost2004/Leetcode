@@ -17,6 +17,40 @@ The number of ways decoding "12" is 2.
 
 public class DecodeWays {
     
+    public int numDecodings(String s) {
+        if (s == null || s.length() == 0)
+            return 0;
+        int ways = 1;
+        int length = s.length();
+        
+        int index = 0;
+        
+        while (index < length) {
+            
+            char k = s.charAt(index);
+            if (k <= '0' || k > '9')
+                return 0;
+
+            int times = 1;
+            while ((k == '1' || k == '2') && index < length -1) {
+                char n = s.charAt(index+1);
+                boolean flag1 = k == '1' && n > '0' && n <= '9';
+                boolean flag2 = k == '2' && n > '0' && n < '7';
+                if (flag1 || flag2) 
+                    times++;
+                index++;
+                k = s.charAt(index);
+            }
+            if (k == '0' && times > 1)
+                times--;
+            ways *= times;
+            index++;
+            
+        }
+        
+        return ways;
+    }
+    
     public boolean ambiguosNum(char a, char b) {
         if ((a == '1' && b != '0')
             || (a == '2' && b < '7' && b > '0'))
@@ -25,7 +59,7 @@ public class DecodeWays {
         return false;
     }
     
-    public int numDecodings(String s) {
+    public int numDecodings2(String s) {
 
         if (s == null || s.length() == 0)
             return 0;
