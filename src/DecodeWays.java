@@ -17,6 +17,8 @@ The number of ways decoding "12" is 2.
 
 public class DecodeWays {
     
+       
+    // my solution
     public int numDecodings(String s) {
         if (s == null || s.length() == 0)
             return 0;
@@ -32,12 +34,16 @@ public class DecodeWays {
                 return 0;
 
             int times = 1;
+            int b = 1;
             while ((k == '1' || k == '2') && index < length -1) {
                 char n = s.charAt(index+1);
                 boolean flag1 = k == '1' && n > '0' && n <= '9';
                 boolean flag2 = k == '2' && n > '0' && n < '7';
-                if (flag1 || flag2) 
-                    times++;
+                if (flag1 || flag2) {
+                    times += b;
+                    b = times - b; 
+                   
+                }
                 index++;
                 k = s.charAt(index);
             }
@@ -51,85 +57,64 @@ public class DecodeWays {
         return ways;
     }
     
-    public boolean ambiguosNum(char a, char b) {
-        if ((a == '1' && b != '0')
-            || (a == '2' && b < '7' && b > '0'))
-            return true;
-        
-        return false;
-    }
-    
-    public int numDecodings2(String s) {
-
-        if (s == null || s.length() == 0)
-            return 0;
-        
-        
-        
-        if (s.charAt(0) == '0')
-            return 0;
-        
-        int outNum = 1;
-        
-        int length = s.length();
-        
-        int i = 0;
-
-        while (i < length) {
   
-            if (s.charAt(i) == '0')
-                return 0;
-            if (i < length -1) {
-                if ((s.charAt(i) == '1' || s.charAt(i) == '2')
-                        && s.charAt(i+1) == '0') {
-                        i += 2;
-                        continue;
-                }
-                if (ambiguosNum(s.charAt(i), s.charAt(i+1))) {
-                    int cnt = 2;
-                    i++;
-                    while (i < length -1 && ambiguosNum(s.charAt(i), s.charAt(i+1)))
-                    {
-                        cnt++;
-                        i++;
-                    }
-                    
-                    if (i < length -1 && s.charAt(i+1) == '0') {
-                        if (s.charAt(i) > '2')
-                            return 0;
-                        cnt--;
-                        i++;
-                    }
-                        
-                    if (cnt != 0)
-                        outNum *= cnt;
-
-                }
-                    
-                
-            }
-            
-            i++;
-            
+    // checked solution from MITBBS
+    public int numDe3(String s) {
+        if (s.length() == 0)
+            return 0;
+        int n = s.length();
+        if (n == 1) {
+            if (s.charAt(0) == '0')
+                return 0; // not valid
+            else
+                return 1;
         }
-        
-        return outNum;
-        
+        int[] num = new int[n];
+        if (s.charAt(0) == '0')
+            return 0; // not valid
+        else
+            num[0] = 1;
+        if (s.charAt(1) != '0')
+            num[1] += num[0];
+        if (s.charAt(0) == '1' || (s.charAt(0) == '2' && s.charAt(1) <= '6'))
+            num[1]++;
+        for (int i = 2; i < n; i++) {
+            if (s.charAt(i) == '0') {
+                if (s.charAt(i - 1) != '1' && s.charAt(i - 1) != '2') {
+                    return 0;
+                }
+            }
+            if (s.charAt(i) != '0')
+                num[i] += num[i - 1];
+            if (s.charAt(i - 1) == '1'
+                    || (s.charAt(i - 1) == '2' && s.charAt(i) <= '6'))
+                num[i] += num[i - 2];
+        }
+        return num[n - 1];
+
     }
     
     public static void main(String[] args) {
         DecodeWays d = new DecodeWays();
         String s = "10";
-        System.out.println(s + " --> "+d.numDecodings(s));
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s)); 
         s = "012";
-        System.out.println(s + " --> "+d.numDecodings(s));
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s)); 
         s = "100";
-        System.out.println(s + " --> "+d.numDecodings(s));   
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s));    
         s = "110";
-        System.out.println(s + " --> "+d.numDecodings(s));  
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s));   
         s = "230";
-        System.out.println(s + " --> "+d.numDecodings(s));        
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s));         
         s = "1090";
-        System.out.println(s + " --> "+d.numDecodings(s));
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s)); 
+        s = "121";
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s));   
+        s = "1211";
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s)); 
+        s = "12111";
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s));
+        s = "121111";
+        System.out.println(s + " --> "+d.numDecodings(s)+"  "+d.numDe3(s));
     }
 }
