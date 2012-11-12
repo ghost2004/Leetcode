@@ -9,11 +9,15 @@
  * same time (ie, you must sell the stock before you buy again).
  */
 public class BestBuySell3 {
+
     public int maxProfit(int[] prices) {
         if (prices.length <= 1)
             return 0;
-        int profit = 0;
+        int profit1 = 0;
+        int profit2 = 0;
         
-        return profit;
+        int curMin = prices[0];
+        
+        return profit2 + profit1;
     }
 }
