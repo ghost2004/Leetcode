@@ -23,13 +23,39 @@ public class BinaryTreeMaxPath {
     public class TreeVal {
         private int self;
         private int export;
+        TreeVal() {
+            self = 0;
+            export = 0;
+        }
     }
     
+
     
+    public TreeVal getTreeVal(TreeNode node) {
+        TreeVal out = new TreeVal();
+        
+        if (node == null)
+            return out;
+        TreeVal left = getTreeVal(node.left);
+        TreeVal right = getTreeVal(node.right);
+        
+        int childExport = Math.max(left.export, right.export);
+        out.export = node.val + childExport;
+        int childSelf = Math.max(left.self, right.self);
+        int self2 = 0;
+        if (left.export > 0)
+        out.self = Math.max(childSelf, left.export + node.val + right.export);
+        return out;
+    }
     
     public int maxPathSum(TreeNode root) {
-
-        return 0;
         
+        if (root == null)
+            return 0;
+        TreeVal left = getTreeVal(root.left);
+        TreeVal right = getTreeVal(root.right);
+        
+        
+             
     }
 }
