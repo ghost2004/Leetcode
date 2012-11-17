@@ -24,27 +24,35 @@ public class BinaryTreeMaxPath {
         private int self;
         private int export;
         TreeVal() {
-            self = 0;
+            self = Integer.MIN_VALUE;
             export = 0;
         }
     }
     
-
+    public int getMaxSub(TreeVal left, int root, TreeVal right) {
+        int c1 = Math.max(left.self, right.self);
+        int c2 = root;
+        if (left.export > 0)
+            c2 += left.export;
+        if (right.export > 0)
+            c2 += right.export;
+        int out = Math.max(c1, c2);
+        return out;
+    }
     
     public TreeVal getTreeVal(TreeNode node) {
         TreeVal out = new TreeVal();
         
         if (node == null)
             return out;
+        
         TreeVal left = getTreeVal(node.left);
         TreeVal right = getTreeVal(node.right);
         
         int childExport = Math.max(left.export, right.export);
         out.export = node.val + childExport;
-        int childSelf = Math.max(left.self, right.self);
-        int self2 = 0;
-        if (left.export > 0)
-        out.self = Math.max(childSelf, left.export + node.val + right.export);
+        
+        out.self = getMaxSub(left, node.val, right);
         return out;
     }
     
@@ -52,10 +60,11 @@ public class BinaryTreeMaxPath {
         
         if (root == null)
             return 0;
+        
         TreeVal left = getTreeVal(root.left);
         TreeVal right = getTreeVal(root.right);
         
-        
+        return getMaxSub(left, root.val, right);
              
     }
 }
