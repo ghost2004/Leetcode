@@ -50,7 +50,9 @@ public class BinaryTreeMaxPath {
         TreeVal right = getTreeVal(node.right);
         
         int childExport = Math.max(left.export, right.export);
-        out.export = node.val + childExport;
+        out.export = node.val;
+        if (childExport > 0)
+            out.export += childExport;
         
         out.self = getMaxSub(left, node.val, right);
         return out;
