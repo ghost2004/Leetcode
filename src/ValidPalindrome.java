@@ -14,7 +14,7 @@
  */
 public class ValidPalindrome {
     
-    public static boolean isValidChar(char idx) {
+    public boolean isValidChar(char idx) {
         if (idx >= 'a' && idx <= 'z')
             return true;
         if (idx >= '0' && idx <= '9')
@@ -22,7 +22,7 @@ public class ValidPalindrome {
         return false;
     }
     
-    public static int getNextChar(String inStr, int idx, int dir) {
+    public int getNextChar(String inStr, int idx, int dir) {
         int index = idx;
         int max = inStr.length() -1;
         while (index >= 0 && index <= max
@@ -32,7 +32,7 @@ public class ValidPalindrome {
         
     }
     
-    public static boolean isPalindrome(String s) {
+    public boolean isPalindrome(String s) {
         
         if (s == null)
             return false;
@@ -54,8 +54,9 @@ public class ValidPalindrome {
     }
     
     public static void main(String[] args) {
-        System.out.println(isPalindrome("..d."));
-        System.out.println(isPalindrome("c#dc"));
+        ValidPalindrome v = new ValidPalindrome();
+        System.out.println(v.isPalindrome("..d."));
+        System.out.println(v.isPalindrome("c#dc"));
     }
     
 }
