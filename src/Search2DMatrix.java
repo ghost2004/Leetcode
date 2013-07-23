@@ -20,28 +20,64 @@ Given target = 3, return true.
 
  */
 public class Search2DMatrix {
+    
+ 
+    // 2 binary search implement
     public boolean searchMatrix(int[][] matrix, int target) {
         boolean out = false;
         
-        int x = matrix.length;
-        int y = matrix[0].length;
+        if (matrix == null || matrix.length == 0 ||
+                matrix[0].length ==0)
+            return false;
+            
+        int row = matrix.length;
+        int col = matrix[0].length;
         
         int start = 0;
-        int end = x - 1;
-        int index;
+        int end = row - 1;
+        int mid;
         
-        while (start < end) {
-            index = (start + end)/2;
-            if (matrix[index][0] == target){
+        while (start <= end) {
+            mid = (start + end)/2;
+            if (matrix[mid][0] == target){
                return true;
-            } else if (matrix[index][0] < target) {
-                start = index;
+            } else if (matrix[mid][0] > target) {
+                end = mid - 1;
                 
             } else {
-                end = index;
+                start = mid + 1;
             }           
             
         }
+        
+        int range = start;
+        
+        if (matrix[range][0] > target || range >= row)
+            range --;
+        
+        int i;
+        
+        for (i = 0; i <= range; i++){
+            
+            if (matrix[i][col -1] < target)
+                continue;
+            start = 0;
+            end = col - 1;
+            
+            while (start <= end) {
+                mid = (start + end)/2;
+                if (matrix[i][mid] == target){
+                   return true;
+                } else if (matrix[i][mid] > target) {
+                    end = mid - 1;
+                    
+                } else {
+                    start = mid + 1;
+                }       
+            }
+            
+        }
+       
         
         
         return out;
