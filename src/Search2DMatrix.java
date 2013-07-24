@@ -21,13 +21,43 @@ Given target = 3, return true.
  */
 public class Search2DMatrix {
     
+    // Step-wise Linear Search implement
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        
+        if (matrix == null || matrix.length == 0
+                || matrix[0].length == 0)
+            return false;
+        
+        int row = matrix.length;
+        int col = matrix[0].length;
+        
+        // start with upper right corner
+        int x = 0;
+        int y = col - 1;
+        
+        while (x <= row - 1  && y >= 0) {
+            if (matrix[x][y] == target)
+                return true;
+            else if (matrix[x][y] < target) {
+                x++;
+            } else {
+                y--;
+            }
+                
+        }
+        
+        
+        return false;
+    
+    }
+    
  
     // 2 binary search implement
     public boolean searchMatrix(int[][] matrix, int target) {
         boolean out = false;
         
-        if (matrix == null || matrix.length == 0 ||
-                matrix[0].length ==0)
+        if (matrix == null || matrix.length == 0
+                || matrix[0].length == 0)
             return false;
             
         int row = matrix.length;
@@ -39,7 +69,7 @@ public class Search2DMatrix {
         
         while (start <= end) {
             mid = (start + end)/2;
-            if (matrix[mid][0] == target){
+            if (matrix[mid][0] == target) {
                return true;
             } else if (matrix[mid][0] > target) {
                 end = mid - 1;
@@ -53,11 +83,11 @@ public class Search2DMatrix {
         int range = start;
         
         if (matrix[range][0] > target || range >= row)
-            range --;
+            range--;
         
         int i;
         
-        for (i = 0; i <= range; i++){
+        for (i = 0; i <= range; i++) {
             
             if (matrix[i][col -1] < target)
                 continue;
@@ -66,7 +96,7 @@ public class Search2DMatrix {
             
             while (start <= end) {
                 mid = (start + end)/2;
-                if (matrix[i][mid] == target){
+                if (matrix[i][mid] == target) {
                    return true;
                 } else if (matrix[i][mid] > target) {
                     end = mid - 1;
