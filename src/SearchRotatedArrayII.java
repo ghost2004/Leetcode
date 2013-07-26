@@ -10,8 +10,7 @@ Write a function to determine if a given target is in the array.
 public class SearchRotatedArrayII {
     
     public boolean search(int[] A, int target) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
+
         if (A == null || A.length == 0)
             return false;
         int left = 0;

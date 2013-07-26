@@ -13,7 +13,8 @@ You may assume no duplicate exists in the array.
   
 public class SearchRotatedArray {
     public int search(int[] A, int target) {
-        
+        if (A == null || A.length == 0)
+            return -1;
         int leftIndex = 0;
         int rightIndex = A.length - 1;
         
