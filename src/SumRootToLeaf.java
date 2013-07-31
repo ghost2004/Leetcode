@@ -48,10 +48,6 @@ public class SumRootToLeaf {
     
     public int sumNumbers(TreeNode root) {
         return getSum(root, 0);
-        
-       
-
-        
     }
 
 }
