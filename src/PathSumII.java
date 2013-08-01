@@ -21,13 +21,7 @@ return
  */
 import java.util.ArrayList;
 public class PathSumII {
-    public class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-    
+
     public void hasPathSum(TreeNode node, int sum, 
             ArrayList<Integer> list, ArrayList<ArrayList<Integer>> output)
     {

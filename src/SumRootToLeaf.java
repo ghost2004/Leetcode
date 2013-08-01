@@ -19,12 +19,7 @@ Return the sum = 12 + 13 = 25.
  */
 
 public class SumRootToLeaf {
-    public class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
-        TreeNode(int x) { val = x; }
-    }    
+ 
     
     public int getSum(TreeNode node, int val)
     {

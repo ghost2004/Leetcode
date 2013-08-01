@@ -6,11 +6,7 @@ a binary tree in which the depth of the two subtrees of every
 node never differ by more than 1.
  */
 public class IsBalancedBinaryTree {
-    
-    public class TreeNode {
-        private TreeNode left;
-        private TreeNode right;
-    }
+
     public int checkDepth(TreeNode node) {
         if (node == null)
             return 0;

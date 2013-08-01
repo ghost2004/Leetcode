@@ -18,13 +18,7 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
  */
 public class PathSum {
     
-    public class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-    
+
 
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null)

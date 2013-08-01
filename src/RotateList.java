@@ -6,17 +6,6 @@ Given 1->2->3->4->5->NULL and k = 2,
 return 4->5->1->2->3->NULL.
  */
 public class RotateList {
-
-
-
-    public class ListNode {
-        private int val;
-        private ListNode next;
-        public ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
     
     public ListNode rotateRight(ListNode head, int n) {
         if (head == null)

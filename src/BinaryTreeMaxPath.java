@@ -13,13 +13,7 @@ Return 6.
  * 
  */
 public class BinaryTreeMaxPath {
-    public class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-    
+
     public class TreeVal {
         private int self;
         private int export;
