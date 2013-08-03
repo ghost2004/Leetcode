@@ -42,7 +42,6 @@ public class Triangle {
                 else {
                     k = triangle.get(level).get(i);
                     k += Math.min(candidate.get(i-1), candidate.get(i));
-                    
                 }
                 next.add(k);
             }
