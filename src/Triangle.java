@@ -18,8 +18,35 @@ Note:
  is the total number of rows in the triangle.
  */
 public class Triangle {
-    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
 
+    // Down to up solution
+    public int minimumTotal2(ArrayList<ArrayList<Integer>> triangle) {
+        int out = 0;
+
+        if (triangle == null || triangle.size() == 0)
+            return out;
+        int tLevel = triangle.size();
+
+        int[] candidate = new int[tLevel];
+        
+        for (int i = 0; i < tLevel; i++)
+            candidate[i] = triangle.get(tLevel-1).get(i);
+        
+        for (int level = tLevel - 2; level >= 0; level--) {
+            for (int idx = 0; idx <= level; idx++) {
+                int min = Math.min(candidate[idx], candidate[idx+1]);
+                candidate[idx] = triangle.get(level).get(idx) + min;
+            }
+            
+        }
+        
+        out =  candidate[0];
+        
+        return out;
+    }
+    
+    // Up to down solution
+    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
         int out = 0;
         int min;
         if (triangle == null || triangle.size() == 0)
