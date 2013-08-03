@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayList;
 /*
  * Given a string containing only digits, restore it 
  * by returning all possible valid IP address combinations.
@@ -22,8 +22,9 @@ public class RestoreIPAddress {
             return;
         if (prefix.size() == 3)
         {
-            if (s.length() <= 3 && 
-                   (s.length() == 1 || s.charAt(0)!= '0')){
+            if (s.length() <= 3
+                   && (s.length() == 1 || s.charAt(0) != '0'))
+            {
                 subIP = Integer.parseInt(s);
                 if (subIP >= 0 && subIP <= 255) {
                     StringBuffer buf = new StringBuffer();
@@ -38,8 +39,8 @@ public class RestoreIPAddress {
             
             return;
         }
-        for (i = 1; i <=3 ;i++) {
-            if (i < s.length() && ( i == 1 || s.charAt(0) != '0')) {
+        for (i = 1; i <= 3; i++) {
+            if (i < s.length() && (i == 1 || s.charAt(0) != '0')) {
                 subIP = Short.parseShort(s.substring(0, i));
                 if (subIP <= 255) {
                     prefix.add(subIP);
@@ -77,13 +78,13 @@ public class RestoreIPAddress {
     public static void main(String[] args) {
         String s = "0000";
         RestoreIPAddress r = new RestoreIPAddress();
-        printIP(r,s);
+        printIP(r, s);
         
         s = "172162541";
-        printIP(r,s);
+        printIP(r, s);
         
         s = "010010";
-        printIP(r,s);
+        printIP(r, s);
 
         
     }
