@@ -12,6 +12,9 @@ public class PascalTriangleII {
     public ArrayList<Integer> getRow(int rowIndex) {
         ArrayList<Integer> row = new  ArrayList<Integer>();
         
+        if (rowIndex < 0)
+            return row;
+        
         row.add(1);
         
         if (rowIndex == 0)
