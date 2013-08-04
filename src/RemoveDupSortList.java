@@ -6,6 +6,24 @@ Given 1->1->2, return 1->2.
 Given 1->1->2->3->3, return 1->2->3.
  */
 public class RemoveDupSortList {
+    public ListNode deleteDuplicates2(ListNode head) {
+        if (head == null)
+            return null;
+        ListNode prev = head;
+        ListNode cur = head;
+        
+        while (cur.next != null) {
+            cur = cur.next;
+            if (cur.val == prev.val) {
+                prev.next = cur.next;
+                cur = prev;
+            } else
+                prev = cur;
+            
+        }
+        
+        return head;
+    }
     
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null)
