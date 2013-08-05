@@ -8,6 +8,7 @@ public class ListNode {
         val = x;
         next = null;
     }
+    
     public void printThisNode() {
         ListNode node = this;
         while (node != null) {
@@ -16,6 +17,7 @@ public class ListNode {
         }
         System.out.println("null");
     }
+    
     public static void printListNode(ListNode n) {
         ListNode node = n;
         
@@ -24,6 +26,19 @@ public class ListNode {
             node = node.next;
         }
         System.out.println("null");
+    }
+    
+    public static ListNode initFromArray(int[] array){
+        if (array == null || array.length == 0)
+            return null;
+        ListNode head = new ListNode(array[0]);
+        ListNode cur = head;
+        for (int i = 1; i < array.length; i++) {
+            ListNode next = new ListNode(array[i]);
+            cur.next = next;
+            cur = next;
+        }
+        return head;
     }
     
 }
