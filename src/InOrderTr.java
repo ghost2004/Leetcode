@@ -17,12 +17,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class InOrderTr {
-    public class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
     
     public void inorder(TreeNode node, ArrayList<Integer> list) {
         if (node == null)
