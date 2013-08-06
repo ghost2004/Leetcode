@@ -31,7 +31,7 @@ public class ReverseLinkListII {
         ListNode cur = start;
         ListNode next = cur.next;
         
-        while (next !=null && step < n){
+        while (next != null && step < n) {
             tmp = next.next;
             next.next = cur;
             cur = next;
@@ -48,9 +48,9 @@ public class ReverseLinkListII {
     }
     
     
-    public static void main (String[] arg) {
+    public static void main(String[] arg) {
         ListNode node;
-        int[] a = {1,2,3};
+        int[] a = {1, 2, 3};
         node = ListNode.initFromArray(a);
         ReverseLinkListII rev = new ReverseLinkListII();
         ListNode.printListNode(rev.reverseBetween(node, 1, 3));

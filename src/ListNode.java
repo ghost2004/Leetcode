@@ -28,7 +28,7 @@ public class ListNode {
         System.out.println("null");
     }
     
-    public static ListNode initFromArray(int[] array){
+    public static ListNode initFromArray(int[] array) {
         if (array == null || array.length == 0)
             return null;
         ListNode head = new ListNode(array[0]);
