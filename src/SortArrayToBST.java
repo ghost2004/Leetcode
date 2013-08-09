@@ -3,7 +3,7 @@
  * convert it to a height balanced BST.
  */
 public class SortArrayToBST {
-    
+    // first solution
     public TreeNode formBST(int[] num, int begin, int end) {
         int middle = (begin + end)/2;
         TreeNode node = new TreeNode(num[middle]);
@@ -28,6 +28,17 @@ public class SortArrayToBST {
         return formBST(num, 0, length-1);
 
         
+    }
+    
+    // second solution
+    public TreeNode formBST2(int[] num, int begin, int end) {
+        if (begin > end)
+            return null;
+        int middle = (begin + end)/2;
+        TreeNode node = new TreeNode(num[middle]);
+        node.left = formBST2(num, begin, middle-1);
+        node.right = formBST2(num, middle+1, end);
+        return node;
     }
 
 }
