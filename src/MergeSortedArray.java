@@ -20,7 +20,7 @@ public class MergeSortedArray {
             }
             index--;
         }
-        
+        /*
         int idx;
         boolean flag;
         
@@ -39,6 +39,11 @@ public class MergeSortedArray {
                 A[index--] = B[idx--];
 
         }
+        */
+        
+        // There is no need to copy the rest of array A
+        while (bIdx >= 0)
+            A[index--] = B[bIdx--];
           
         
 
