@@ -31,24 +31,14 @@ public class BuildTreeInorderPreorder {
         int rootIdx = findIdx(inorder, preorder[pb], ib, ie);
         if (rootIdx == -1)
             return null;
-        if (rootIdx == ib) {
-            root.left = null;
-            root.right = bldTree(preorder, pb+1, pe,
-                    inorder, ib+1, ie);
-        } else if (rootIdx == ie) {
-            root.right = null;
-            root.left = bldTree(preorder, pb+1, pe,
-                    inorder, ib, ie-1);
-        } else {
-            int leftIdx = rootIdx - ib + pb;
-            if (leftIdx < 0)
-                return null;
-            root.left = bldTree(preorder, pb+1, leftIdx, 
-                    inorder, ib, rootIdx-1);
-            root.right = bldTree(preorder, leftIdx+1, pe,
-                    inorder, rootIdx+1, ie);
-        }
-        
+        int leftIdx = rootIdx - ib + pb;
+        if (leftIdx < 0)
+            return null;
+        root.left = bldTree(preorder, pb+1, leftIdx, 
+                inorder, ib, rootIdx-1);
+        root.right = bldTree(preorder, leftIdx+1, pe,
+                inorder, rootIdx+1, ie);
+
         return root;
         
     }
