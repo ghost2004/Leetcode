@@ -23,6 +23,21 @@ public class TreeNode {
     public TreeNode left;
     public TreeNode right;
     public TreeNode(int x) { val = x; }
+    
+    public void printNode(TreeNode node) {
+        if (node == null) {
+            System.out.print("# ");
+        } else {
+            System.out.print(node.val+" ");
+            printNode(node.left);
+            printNode(node.right);
+        }
+    }
+    
+    public void print() {
+        printNode(this);
+        System.out.println("");
+    }
 }
     
     
