@@ -26,7 +26,7 @@ public class BuildTreeInorderPostorder {
         if (rootIdx == -1)
             return null;
         int rightIdx = pe - (ie - rootIdx); 
-        root.left = bldTree(inorder,ib, rootIdx -1,
+        root.left = bldTree(inorder, ib, rootIdx -1,
                 postorder, pb, rightIdx-1);
         root.right = bldTree(inorder, rootIdx+1, ie,
                 postorder, rightIdx, pe-1);
@@ -43,7 +43,7 @@ public class BuildTreeInorderPostorder {
             || postorder.length != inorder.length)
             return null;
         
-        return bldTree( inorder, 0, inorder.length-1,
+        return bldTree(inorder, 0, inorder.length-1,
                 postorder, 0, postorder.length-1);        
 
         
