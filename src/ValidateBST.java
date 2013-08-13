@@ -33,5 +33,14 @@ public class ValidateBST {
         checkBST(root);
         return flag;
     }
+    
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(0);
+        TreeNode left = new TreeNode(-1);
+        root.right = left;
+        ValidateBST bst = new ValidateBST();
+        System.out.println(bst.isValidBST(root));
+        
+    }
 
 }
