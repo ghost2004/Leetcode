@@ -12,14 +12,14 @@ binary search trees.
  */
 public class ValidateBST {
 
-    int cur = Integer.MIN_VALUE;
-    boolean flag = true;
+    int cur;
+    boolean flag;
     
     public void checkBST(TreeNode node) {
         if (node == null)
             return;
         checkBST(node.left);
-        if (node.val < cur) { 
+        if (node.val <= cur) { 
             flag = false;
             return;
         }
@@ -29,14 +29,16 @@ public class ValidateBST {
     }
     
     public boolean isValidBST(TreeNode root) {
+        cur = Integer.MIN_VALUE;
+        flag = true;
 
         checkBST(root);
         return flag;
     }
     
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(0);
-        TreeNode left = new TreeNode(-1);
+        TreeNode root = new TreeNode(-1);
+        TreeNode left = new TreeNode(0);
         root.right = left;
         ValidateBST bst = new ValidateBST();
         System.out.println(bst.isValidBST(root));
