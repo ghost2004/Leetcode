@@ -51,7 +51,7 @@ public class GenParentheses {
         printArray(gen.generateParenthesis(2));
         printArray(gen.generateParenthesis(3));
         printArray(gen.generateParenthesis(4));
-        printArray(gen.generateParenthesis(5));
+        printArray(gen.generateParenthesis(0));
         
     }
 
