@@ -16,28 +16,25 @@ public class LongestValidateParenthese {
             return 0;
         int length = s.length();
         int max = 0;
-        int lastIdx = length;
-        int lastLen = 0;
+        int lastIdx = -1;
         Stack<Integer> stack = new Stack<Integer>();
-        
         
         for (int i = 0; i < length; i++) {
             char c = s.charAt(i);
             if (c == '(') {
                 stack.push(i);
             } else if (c == ')') {
-                if (stack.size() == 0)
+                if (stack.isEmpty()) {
+                    lastIdx = i;
                     continue;
-                int idx = stack.pop();
-                int len = i - idx + 1;
-                if (idx < lastIdx) {
-                    lastIdx = idx;
-                    lastLen = len;
-                } else if (lastIdx  == idx -1) {
-                    lastLen += len;
-                    len = lastLen;
                 }
-                max = Math.max(max, len);
+                stack.pop();
+                if (stack.isEmpty()) {
+                    max = Math.max(max, i - lastIdx);
+                } else {
+                    max = Math.max(max, i - stack.peek());
+                }
+                
             }
         }
         
@@ -49,6 +46,12 @@ public class LongestValidateParenthese {
     {
         LongestValidateParenthese p = new LongestValidateParenthese();
         String t1 = "()()";
+        System.out.println(t1+"--"+p.longestValidParentheses(t1));
+        t1 = "(()()(())((";
+        System.out.println(t1+"--"+p.longestValidParentheses(t1));
+        t1 = ")(())))(())())";
+        System.out.println(t1+"--"+p.longestValidParentheses(t1));
+        t1 = "()((())()";
         System.out.println(t1+"--"+p.longestValidParentheses(t1));
     }
 }
