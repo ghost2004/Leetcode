@@ -11,8 +11,9 @@ A solution using O(n) space is pretty straight forward.
  */
 public class RecoverBST {
     
-    ArrayList<TreeNode> nodes;
+    TreeNode[] nodes;
     TreeNode prev;
+    int idx;
 
     
     public void searchMis(TreeNode cur)
@@ -21,10 +22,14 @@ public class RecoverBST {
             return;
         searchMis(cur.left);
         if (prev != null && prev.val > cur.val) {
-            if (!nodes.contains(prev))
-                nodes.add(prev);
-            if (!nodes.contains(cur))
-                nodes.add(cur);
+            if (idx == 0) {
+                nodes[0] = prev;
+                nodes[1] = cur;
+                idx = 1;
+            } else {
+                nodes[1] = cur;
+            }
+            
                 
         }
         prev = cur;
@@ -33,13 +38,16 @@ public class RecoverBST {
     }
     
     public void recoverTree(TreeNode root) {
-        nodes = new ArrayList<TreeNode>();
+        nodes = new TreeNode[2];
+        idx = 0;
+        nodes[0] = null;
+        nodes[1] = null;
 
         prev = null;
         searchMis(root);
-        int tmp = nodes.get(0).val;
-        nodes.get(0).val = nodes.get(nodes.size()-1).val;
-        nodes.get(nodes.size()-1).val = tmp;
+        int tmp = nodes[0].val;
+        nodes[0].val = nodes[1].val;
+        nodes[1].val = tmp;
     }
     
     public static void main(String[] args)
