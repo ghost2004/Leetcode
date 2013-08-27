@@ -20,7 +20,9 @@ return 10.
 
  */
 public class LargestRectHistogram {
+
     
+    // Solution with brute force, O(n^2)
     public int largestRectangleArea(int[] height) {
         if (height == null || height.length == 0)
             return 0;
@@ -41,5 +43,49 @@ public class LargestRectHistogram {
 
         return max;
     }
-
+    
+    // Solution with Pruning
+    public int largestRectangleArea2(int[] height) {
+        if (height == null || height.length == 0)
+            return 0;
+        
+        int max = 0;
+        int i = 0;
+        
+        while (i < height.length) {
+            int k = i;
+            while (k < height.length-1) {
+                if (height[k] > height[k+1]) {
+                    break;
+                }
+                k++;
+            }
+            
+            i = k;
+            int lowest = height[i];
+            for (int j = i; j >= 0; j--) {
+                lowest = Math.min(lowest, height[j]);
+                int val = (i-j+1)*lowest;
+                max = Math.max(max, val);
+                
+            }
+            i++;
+                
+        }
+        return max;
+    
+    }
+    
+    public static void main(String[] args) {
+        
+        LargestRectHistogram  l = new LargestRectHistogram();
+        
+        int[] a0 = {0};
+        int[] a1 = {1, 1};
+        int[] a3 = {2, 1, 5, 6, 2, 3};
+        System.out.println(l.largestRectangleArea2(a0));
+        System.out.println(l.largestRectangleArea2(a1));
+        System.out.println(l.largestRectangleArea2(a3));
+    }
+    
 }
