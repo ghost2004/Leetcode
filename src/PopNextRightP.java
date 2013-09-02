@@ -34,6 +34,8 @@ After calling your function, the tree should look like:
     4->5->6->7 -> NULL
  */
 import java.util.LinkedList;
+
+
 public class PopNextRightP {
     
      public class TreeLinkNode {
@@ -88,5 +90,36 @@ public class PopNextRightP {
 
          
      }     
+     
+     public void connect2(TreeLinkNode root) {
+         
+         if (root == null)
+             return;
+
+         if (root.left == null && root.right == null)
+             return;
+         TreeLinkNode cur = root;
+         TreeLinkNode sibling;
+         TreeLinkNode next = null;
+         while (cur != null && cur.left != null) {
+             next = cur.left;
+             while (cur != null) {
+                 if (cur.next != null)
+                     sibling = cur.next.left;
+                 else
+                     sibling = null;
+                 cur.left.next = cur.right;
+                 cur.right.next = sibling;
+                 cur = cur.next; 
+                 
+             }
+             
+             cur = next;
+             
+         }
+
+
+
+     }
 
 }
