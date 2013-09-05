@@ -38,7 +38,7 @@ public class SubsetII {
             }
             
             if (i < num.length-1 && num[i] == num[i+1])
-                start = out.size();
+                start = size;
             else 
                 start = 0;
             
