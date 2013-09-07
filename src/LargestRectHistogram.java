@@ -19,6 +19,9 @@ return 10.
 
 
  */
+
+import java.util.Arrays;
+import java.util.Stack;
 public class LargestRectHistogram {
 
     
@@ -76,6 +79,35 @@ public class LargestRectHistogram {
     
     }
     
+    // Dynamic programming solution with O(n) complex
+    public int largestRectangleArea3(int[] height) {
+        int max = 0;
+        Stack<Integer> stack = new Stack<Integer>();
+        // create a new array end with 0
+        int[] h = new int[height.length+1];
+        h = Arrays.copyOf(height, height.length + 1);
+        h[height.length] = 0;
+        int index = 0;
+        while ( index < h.length) {
+            if (stack.isEmpty() || h[index]  >= h[stack.peek()]) {
+                // keep the consecutive increase sequence in stack 
+                stack.push(index);
+                index++;
+            } else {
+                int lastIndex = stack.pop();
+                int area;
+                if (stack.isEmpty())
+                    area = h[lastIndex] * index;
+                else
+                    area = h[lastIndex]  * (index - stack.peek() - 1);
+                max = Math.max(max, area);
+            }
+            
+        }
+        
+        return max;
+    }
+    
     public static void main(String[] args) {
         
         LargestRectHistogram  l = new LargestRectHistogram();
@@ -83,9 +115,11 @@ public class LargestRectHistogram {
         int[] a0 = {0};
         int[] a1 = {1, 1};
         int[] a3 = {2, 1, 5, 6, 2, 3};
-        System.out.println(l.largestRectangleArea2(a0));
-        System.out.println(l.largestRectangleArea2(a1));
-        System.out.println(l.largestRectangleArea2(a3));
+        int[] a4 = {4, 2, 0, 3, 2, 5};
+        System.out.println(l.largestRectangleArea3(a0));
+        System.out.println(l.largestRectangleArea3(a1));
+        System.out.println(l.largestRectangleArea3(a3));
+        System.out.println(l.largestRectangleArea3(a4));
     }
     
 }
