@@ -88,7 +88,7 @@ public class LargestRectHistogram {
         h = Arrays.copyOf(height, height.length + 1);
         h[height.length] = 0;
         int index = 0;
-        while ( index < h.length) {
+        while (index < h.length) {
             if (stack.isEmpty() || h[index]  >= h[stack.peek()]) {
                 // keep the consecutive increase sequence in stack 
                 stack.push(index);
