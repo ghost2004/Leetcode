@@ -5,7 +5,7 @@
 import java.util.Stack;
 public class MaxRectangle {
     
-    // Solution for  O(N^3)
+    // Solution for  O(N^4)
     private int maxRectArea(char[][] matrix, int row, int col) {
         int area = 1;
         int minWidth = Integer.MAX_VALUE;
@@ -62,7 +62,7 @@ public class MaxRectangle {
         return max;
     }
     
-    // Solution for  O(N^2)
+    // Solution for  O(N^3)
     public int maximalRectangle2(char[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
             return 0;
@@ -87,11 +87,9 @@ public class MaxRectangle {
                     
             }
             height[i][col] = 0;
-        }
-        
-        for (i = 0; i < row; i++) {
             max = Math.max(max, maxHistogram(height[i]));
         }
+
         
         return max;
     }
