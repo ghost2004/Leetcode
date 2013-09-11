@@ -94,4 +94,53 @@ public class MaxRectangle {
         return max;
     }
     
+    // Solution for  O(N^2)
+    public int maximalRectangle3(char[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            return 0;   
+        int max = 0;
+        int row = matrix.length;
+        int col = matrix[0].length;
+        
+        int i, j;
+        
+        int[] height = new int[col]; 
+        int[] left = new int[col];
+        int[] right = new int[col];
+        
+        for (i = 0; i < col; i++) {
+            height[i] = 0;
+            left[i] = 0;
+            right[i] = col;
+        }
+        
+        for (i = 0; i < row; i++) {
+            int lastLeft = 0;
+            int lastRight = col;            
+            for (j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+                    height[i]++;
+                    left[i] = Math.max(left[i], lastLeft);
+                } else {
+                    lastLeft = i;
+                    height[i] = 0;
+                    left[i] = 0;
+                    right[i] = col;
+                }
+                
+            }
+            for (j = col-1; j >= 0; j--) {
+                if (matrix[i][j] == '1') {
+                    right[i] = Math.min(right[i], lastRight);
+                    max = Math.max(max, height[i]*(right[i]-left[i]-1));
+                } else {
+                    lastRight = j;
+                }
+            }
+        }
+        
+        
+        
+        return max;
+    }
 }
