@@ -119,20 +119,21 @@ public class MaxRectangle {
             int lastRight = col;            
             for (j = 0; j < col; j++) {
                 if (matrix[i][j] == '1') {
-                    height[i]++;
-                    left[i] = Math.max(left[i], lastLeft);
+                    height[j]++;
+                    left[j] = Math.max(left[j], lastLeft);
                 } else {
-                    lastLeft = i;
-                    height[i] = 0;
-                    left[i] = 0;
-                    right[i] = col;
+                    lastLeft = j + 1;
+                    height[j] = 0;
+                    left[j] = 0;
+                    right[j] = col;
                 }
                 
             }
             for (j = col-1; j >= 0; j--) {
                 if (matrix[i][j] == '1') {
-                    right[i] = Math.min(right[i], lastRight);
-                    max = Math.max(max, height[i]*(right[i]-left[i]-1));
+                    right[j] = Math.min(right[j], lastRight);
+                    int area = height[j]*(right[j]-left[j]);
+                    max = Math.max(max, area);
                 } else {
                     lastRight = j;
                 }
@@ -142,5 +143,20 @@ public class MaxRectangle {
         
         
         return max;
+    }
+    
+    public static void main(String[] args) {
+        MaxRectangle m = new MaxRectangle();
+        char[][] matrix = new char[4][3];
+        for (int i = 0; i < 4; i++)
+            for (int j = 0 ; j < 3; j++)
+                matrix[i][j] = '0';
+        char[][] m2 = new char[1][1];
+        m2[0][0] = '1';
+        char[][] m3 = {{'0', '1'}, {'0', '1'}};
+        
+        System.out.println(m.maximalRectangle3(matrix));
+        System.out.println(m.maximalRectangle3(m2));
+        System.out.println(m.maximalRectangle3(m3));
     }
 }
