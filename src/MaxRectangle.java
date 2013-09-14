@@ -149,7 +149,7 @@ public class MaxRectangle {
         MaxRectangle m = new MaxRectangle();
         char[][] matrix = new char[4][3];
         for (int i = 0; i < 4; i++)
-            for (int j = 0 ; j < 3; j++)
+            for (int j = 0; j < 3; j++)
                 matrix[i][j] = '0';
         char[][] m2 = new char[1][1];
         m2[0][0] = '1';
