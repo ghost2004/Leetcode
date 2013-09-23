@@ -20,8 +20,8 @@ public class SearchForRange {
             return out;
         int start = 0;
         int end = A.length - 1;
-        while (start < end) {
-            int mid = (end - start)/2;
+        while (start <= end) {
+            int mid = start + (end - start)/2;
             if (A[mid] < target)
                 start = mid + 1;
             else if (A[mid] > target)
@@ -43,6 +43,17 @@ public class SearchForRange {
         }
         
         return out;
+    }
+    
+    public static void main(String[] args) {
+        int[] t1 = {5,7,7,8,8,10};
+        SearchForRange s = new SearchForRange();
+        int[] res = s.searchRange(t1, 8);
+        System.out.println(res[0]+"  "+res[1]);
+        int[] t2 = {1};
+        res = s.searchRange(t2, 1);
+        System.out.println(res[0]+"  "+res[1]);
+        
     }
 
 }
