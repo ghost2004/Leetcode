@@ -33,12 +33,24 @@ public class FirstMissingPostive {
     public int firstMissingPositive(int[] A) {
         int length = A.length;
         
-        int i;
+        int i = 0;
+        
+        while (i < length) {
+            if (A[i] > 0 && A[i] <= length &&A[i] != i+1 && A[A[i]-1] != A[i]) {
+                int tmp = A[A[i]-1];
+                A[A[i]-1] = A[i];
+                A[i] = tmp;
+            }
+            else 
+                i++;
+                
+                
+        }
 
         
         for (i = 0; i < length; i++) {
             if (A[i] != i+1)
-                return i;
+                return i+1;
         }
         
         return length+1;
@@ -47,7 +59,7 @@ public class FirstMissingPostive {
     public static void main(String[] args) {
         FirstMissingPostive f = new FirstMissingPostive();
         int[] t1 = {2, 1};
-        //System.out.println(f.firstMissingPositive(t1));
+        System.out.println(f.firstMissingPositive(t1));
         int[] t2 = {10,4,16,54,17,-7,21,15,25,31,61,1,6,
                 12,21,46,16,56,54,12,23,20,38,63,2,27,35,
                 11,13,47,13,11,61,39,0,14,42,8,16,54,50,
