@@ -36,7 +36,7 @@ public class FirstMissingPostive {
         int i = 0;
         
         while (i < length) {
-            if (A[i] > 0 && A[i] <= length &&A[i] != i+1 && A[A[i]-1] != A[i]) {
+            if (A[i] > 0 && A[i] <= length && A[i] != i+1 && A[A[i]-1] != A[i]) {
                 int tmp = A[A[i]-1];
                 A[A[i]-1] = A[i];
                 A[i] = tmp;
