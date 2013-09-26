@@ -22,51 +22,41 @@ public class WildcardMatch {
             return true;
         if (s == null)
             return false;
-        
        
         int pIdx = 0;
         int sIdx = 0;
+        int starIdx = -1;
+        int lastStar = 0;
         int pLen = p.length();
         int sLen = s.length();
-        boolean flag = false;
         
-        while (pIdx < pLen && sIdx < sLen) {
-            char key = p.charAt(pIdx);
-            if (key == '?') {
-                sIdx++;
-            } else if (key == '*') {
-                flag = true;
-            } else {
-                if (flag) {
-                    flag = false;
-                    while (sIdx < sLen-1 && s.charAt(sIdx) != key)
-                        sIdx++;
-                    if (s.charAt(sIdx) != key)
-                        return false;
-                    
-                        
-                } else {
-                    if (s.charAt(sIdx) != key)
-                        return false;
-                    sIdx++;
-                }
-            }
+        while (sIdx < sLen) {
+            char pKey;
+            if (pIdx < pLen)
+                pKey = p.charAt(pIdx);
+            else
+                pKey = '\0';
             
-            pIdx++;
+            if (s.charAt(sIdx) == pKey || pKey == '?') {
+                sIdx++;
+                pIdx++;
+            } else if (pKey == '*') {
+                starIdx = pIdx;
+                pIdx++;
+                lastStar = sIdx;
+            } else if (starIdx != -1) {
+                pIdx = starIdx + 1;
+                sIdx = (++lastStar);
+            } else
+                return false;
         }
         
-        if (flag && pIdx == pLen)
-            return true;
         
         while (pIdx < pLen) {
             if (p.charAt(pIdx) != '*')
                 return false;
             pIdx++;
         }
-        
-        if (sIdx != sLen)
-            return false;
-        
         return true;
     }
     
@@ -85,5 +75,7 @@ public class WildcardMatch {
         System.out.println(w.isMatch("a", ""));
         System.out.println(w.isMatch("b", "*?*?"));
         System.out.println(w.isMatch("a", "*a"));
+        System.out.println(w.isMatch("ab", "*a"));
+        System.out.println(w.isMatch("bbaabb", "b??a"));
     }
 }
