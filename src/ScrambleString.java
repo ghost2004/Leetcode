@@ -41,6 +41,7 @@ Given two strings s1 and s2 of the same length,
 determine if s2 is a scrambled string of s1.
  */
 public class ScrambleString {
+    // recursive solution
     public boolean isScramble(String s1, String s2) {
      
         if (s1 == null || s2 == null)
@@ -74,6 +75,28 @@ public class ScrambleString {
             
     }
     
+    // DP solution
+    public boolean isScramble2(String s1, String s2) {
+        if (s1 == null || s2 == null)
+            return false;
+        
+        
+        if (s1.length() != s2.length())
+            return false;
+        int length = s1.length();
+
+        if (length == 0)
+            return true;
+        boolean[][][] dp = new boolean[length][length][length];
+        
+        for (int i = length-1; i >= 0; i--) {
+            for (int j = length-1; j >= 0; j--) {
+                
+            }
+        }
+        
+    
+    }
     public static void main(String[] args) {
         ScrambleString s = new ScrambleString();
         System.out.println("aa, aa " + s.isScramble("aa", "aa"));
