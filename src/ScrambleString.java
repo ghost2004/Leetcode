@@ -42,7 +42,7 @@ determine if s2 is a scrambled string of s1.
  */
 public class ScrambleString {
     // recursive solution
-    public boolean isScramble(String s1, String s2) {
+    public boolean isScramble2(String s1, String s2) {
      
         if (s1 == null || s2 == null)
             return false;
@@ -76,7 +76,7 @@ public class ScrambleString {
     }
     
     // DP solution
-    public boolean isScramble2(String s1, String s2) {
+    public boolean isScramble(String s1, String s2) {
         if (s1 == null || s2 == null)
             return false;
         
@@ -87,16 +87,32 @@ public class ScrambleString {
 
         if (length == 0)
             return true;
-        boolean[][][] dp = new boolean[length][length][length];
+        boolean[][][] dp = new boolean[length][length][length+1];
         
         for (int i = length-1; i >= 0; i--) {
             for (int j = length-1; j >= 0; j--) {
-                
+                int maxLen = length - Math.max(i, j);
+                for (int k = 1; k <= maxLen; k++) {
+                    if (s1.substring(i, i+k).equals(s2.substring(j, j+k)))
+                        dp[i][j][k] = true;
+                    else {
+                        for (int l = 1; l < k; l++) {
+                            if ((dp[i][j][l] && dp[i+l][j+l][k-l])
+                                    || dp[i][j+k-l][l] && dp[i+l][j][k-l])
+                            {
+                                dp[i][j][k] = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
         
+        return dp[0][0][length];
     
     }
+    
     public static void main(String[] args) {
         ScrambleString s = new ScrambleString();
         System.out.println("aa, aa " + s.isScramble("aa", "aa"));
