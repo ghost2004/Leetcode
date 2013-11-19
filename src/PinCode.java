@@ -7,50 +7,43 @@
  * Find a shortest string that guarantee to find out right pin number
  * 
  */
+import java.util.HashSet;
+
 public class PinCode {
-    private boolean[][] flags;
-    public String getPinCode() {
-        flags = new boolean[1000][10];
-        String stream = "0000";
-        flags[0][0] = true;
-        int idx = 1;
-        int cnt = 1;
-
-        while (cnt < 10000) {
-            int p = Integer.parseInt(stream.substring(idx, idx+3));
-            int k = 9;
-            int p2 = p;
-            boolean found = false;
-            do {
-                while (k >= 0 && flags[p][k])
-                    k--;
-                if (k < 0) 
-                    p++;
-                else {
-                    cnt++;
-                    found = true;
-                }
-                    
-                p = p % 1000;
-                
-            } while (!found);
+    
+    private String dfs(HashSet<Integer> visited, String pin) {
+        int idx = pin.length() - 2;
+        String prefix = pin.substring(idx, idx+2);
+        String out = null;
+        for (int i = 0; i < 2; i++) {
+            String nextPin = prefix + Integer.toString(i);
             
-            if (p2 == p) {
-                stream += Integer.toString(k);
-                idx++;
-            } else {
-                if (p < 10) 
-                    stream += "00"+Integer.toString(p);
-                else if (p < 100)
-                    stream += "0"+Integer.toString(p);
-                else
-                    stream += Integer.toString(p);
-                idx += 3;
+            Integer key = new Integer(nextPin);
+            if (!visited.contains(key)) {
+                String newPin = pin+Integer.toString(i);
+                
+                visited.add(key);
+                System.out.println("New Key " +key + " new Pin "+ newPin + " size " + visited.size() );
+                if (visited.size() == 8)
+                    return newPin;
+                
+                out = dfs(visited, newPin);
+                if (out != null)
+                    return out;
+                visited.remove(key);
             }
-
+            
         }
-
-        return stream;
+        
+        System.out.println("Failed to find an answer in " + pin);
+        return out;
+    }
+    public String getPinCode() {
+        String stream = "000";
+        HashSet<Integer> visited = new  HashSet<Integer>();
+        visited.add(0);
+        String out = dfs(visited, stream);
+        return out;
     }
     
     public static void main(String[] args) {
